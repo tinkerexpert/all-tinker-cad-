@@ -1,0 +1,58 @@
+/ make an array to save Sev Seg pin configuration of numbers
+
+int digit_array[11][7] = {  { 1,1,1,1,1,1,0 },    // 0 abcdef
+                            { 0,1,1,0,0,0,0 },    // 1  bc
+                            { 1,1,0,1,1,0,1 },    // 2 ab de g
+                            { 1,1,1,1,0,0,1 },    // 3 abcd  g
+                            { 0,1,1,0,0,1,1 },    // 4  bc  fg
+                            { 1,0,1,1,0,1,1 },    // 5 a cd fg
+                            { 1,0,1,1,1,1,1 },    // 6 a cdefg
+                            { 1,1,1,0,0,0,0 },    // 7 abc    
+                            { 1,1,1,1,1,1,1 },    // 8 abcdefg
+                            { 1,1,1,0,0,1,1 },    // 9 abcd fg
+                            { 0,0,0,0,0,0,1 },};  // -       g
+                                       
+//function header
+void Digit_Write(int);
+
+void setup() 
+{ 
+  // set pin modes
+  pinMode(6, OUTPUT);   
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+}
+
+void loop() 
+{
+  Digit_Write(0);
+  delay(1000);
+  Digit_Write(6);
+  delay(1000);
+  Digit_Write(10);
+  delay(1000);
+  Digit_Write(1);
+  delay(1000);
+  Digit_Write(7);
+  delay(1000);
+  Digit_Write(10);            
+  delay(2000);
+  Digit_Write(0);
+  delay(1000);
+  Digit_Write(7);
+  delay(2000);
+}
+
+void Digit_Write(int number) 
+{
+  int pin = 6;
+  for (int j = 0; j < 7; j++)
+  {
+   digitalWrite(pin, digit_array[number][j]); //Non-Inverted array value due to use of Common Cathode display
+   pin++;
+  }
+}
